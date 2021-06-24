@@ -68,8 +68,23 @@ const earth = new THREE.Mesh(
     map: earthTexture,
   })
 );
-
+earth.position.z = 30;
+earth.position.setX(-10);
 scene.add(earth);
+
+function moveCamera() {
+  const t = document.body.getBoundingClientRect().top;
+  earth.rotation.x += 0.05;
+  earth.rotation.y += 0.075;
+  earth.rotation.z += 0.05;
+
+  camera.position.z = t * -0.01;
+  camera.position.x = t * -0.0002;
+  camera.position.y = t * -0.0002;
+}
+
+document.body.onscroll = moveCamera;
+
 
 function animate() {
   renderer.render(scene, camera);
